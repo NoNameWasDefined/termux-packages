@@ -24,6 +24,8 @@ TERMUX_PKG_EXTRA_CONFIGURE_ARGS="
 -Dvulkan-drivers=wrapper
 "
 
+_WRAPPER_BIN=$TERMUX_PKG_BUILDDIR/_wrapper/bin
+
 termux_step_post_get_source() {
 	git fetch --unshallow
 	# Do not use meson wrap projects
@@ -41,7 +43,6 @@ termux_step_pre_configure() {
 	CPPFLAGS+=" -U__ANDROID__"
 	LDFLAGS+=" -landroid-shmem"
 
-	_WRAPPER_BIN=$TERMUX_PKG_BUILDDIR/_wrapper/bin
 	mkdir -p $_WRAPPER_BIN
 	if [ "$TERMUX_ON_DEVICE_BUILD" = "false" ]; then
 		sed 's|@CMAKE@|'"$(command -v cmake)"'|g' \
