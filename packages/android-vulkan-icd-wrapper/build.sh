@@ -3,23 +3,16 @@ TERMUX_PKG_DESCRIPTION="Android's Vulkan driver as a Vulkan ICD (AdrenoTools inc
 TERMUX_PKG_LICENSE="MIT"
 TERMUX_PKG_LICENSE_FILE="docs/license.rst"
 TERMUX_PKG_MAINTAINER="@termux"
-TERMUX_PKG_VERSION="25.0.0"
-# set package revision to 1 then increment it next time after changing the commits
-# pinning libadrenotools is needed since this project is not stable
-_COMMITS_SHA=(
-	7eae6442f5d8a7414e66adc0d42857c143f20fa9
-	8483dfdaa2abf97ee89ad0e5f337e7b508550c6b
-	b10d48548d608dfca38ffc449d0350335b2f3737
-)
+TERMUX_PKG_VERSION="0.0.1"
 TERMUX_PKG_SRCURL=(
-	"https://github.com/Pipetto-crypto/mesa/archive/${_COMMITS_SHA[0]}.tar.gz"
-	"https://github.com/Pipetto-crypto/libadrenotools/archive/${_COMMITS_SHA[1]}.tar.gz"
-	"https://github.com/Pipetto-crypto/liblinkernsbypass/archive/${_COMMITS_SHA[2]}.tar.gz"
+	"https://github.com/Pipetto-crypto/mesa/archive/refs/tags/v${TERMUX_PKG_VERSION}.tar.gz"
+	https://github.com/Pipetto-crypto/libadrenotools/archive/refs/heads/master.tar.gz
+	https://github.com/Pipetto-crypto/liblinkernsbypass/archive/refs/heads/master.tar.gz
 )
 TERMUX_PKG_SHA256=(
-	0da3999306d430b49f0a538adfd7946339b00cc81e979c251009c617992c0747
-	d6060f3dc8b0d67259784162add0d9f281a9bfc87e7c49324eea6e3fb1e00f6a
-	b130c51f26a5f697e0ab32564cf3a8f18b65985cacb2d0ca17d6a94faea05053
+	8ebb38a36a8b9755105b66a9cf40bc2a7c517cd77e74afef8583f74ba5ee4a02
+	76aea1d680b74f4dd4031a8a540018f9502971b455a9e62e57c316b654e74ccf
+	06a4a9cee0b6fbbf09e9d5bc160736f34e0a34f784fcf502d2290fa9cff8e994
 )
 TERMUX_PKG_DEPENDS="libandroid-shmem, libc++, libdrm, libx11, libxcb, libxshmfence, libwayland, vulkan-loader-generic, zlib, zstd"
 TERMUX_PKG_BUILD_DEPENDS="libandroid-shmem-static, libwayland-protocols, libxrandr, xorgproto"
@@ -41,9 +34,9 @@ TERMUX_PKG_EXTRA_CONFIGURE_ARGS="
 "
 
 termux_step_post_get_source() {
-	mv -T "libadrenotools-${_COMMITS_SHA[1]}" subprojects/libadrenotools
+	mv -T libadrenotools-master subprojects/libadrenotools
 	# Git submodules are not included in Git archives
-	mv -T "liblinkernsbypass-${_COMMITS_SHA[2]}" subprojects/libadrenotools/lib/linkernsbypass
+	mv -T liblinkernsbypass-master subprojects/libadrenotools/lib/linkernsbypass
 }
 
 termux_step_pre_configure() {
