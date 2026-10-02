@@ -167,7 +167,7 @@ termux_step_pre_configure() {
 	*) BINDGEN_EXTRA_CLANG_ARGS+=" --target=${TERMUX_ARCH}-linux-android${TERMUX_PKG_API_LEVEL}" ;;
 	esac
 
-	CPPFLAGS+=" -D__USE_GNU"
+	CPPFLAGS+=" -D__USE_GNU -DPROP_VALUE_MAX=92"
 	LDFLAGS+=" -landroid-shmem"
 
 	# load build tools, including the mesa_clc program built for GNU/Linux
@@ -189,6 +189,9 @@ termux_step_pre_configure() {
 	if [ $TERMUX_ARCH = "arm" ] || [ $TERMUX_ARCH = "aarch64" ]; then
 		_vk_drivers+=",freedreno"
 		TERMUX_PKG_EXTRA_CONFIGURE_ARGS+=" -Dfreedreno-kmds=msm,kgsl"
+	fi
+	if [[ ${TERMUX_ARCH} != arm ]] || true; then
+		_vk_drivers+=",amd"
 	fi
 	TERMUX_PKG_EXTRA_CONFIGURE_ARGS+=" -Dvulkan-drivers=$_vk_drivers"
 }
