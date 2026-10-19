@@ -1,0 +1,25 @@
+diff --git a/xgl/CMakeLists.txt b/xgl/CMakeLists.txt
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -52,9 +52,6 @@ include(XglOptions)
+ include(XglOverrides)
+ include(XglCompileDefinitions)
+ include(XglHelper)
+-if(UNIX)
+-  include(XglPackaging)
+-endif()
+ 
+ ### Project Options ###################################################################################################
+ xgl_options()
+@@ -275,11 +272,6 @@ target_include_directories(xgl_interface
+         icd/api/include
+ )
+ 
+-### Identify Packge Type ##########################################################################################
+-if(UNIX)
+-  identifyPackageType()
+-endif()
+-
+ ### Add Subdirectories ################################################################################################
+ # Metrohash
+ if(EXISTS ${XGL_METROHASH_PATH})
