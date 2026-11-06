@@ -31,9 +31,6 @@ TERMUX_PKG_EXTRA_CONFIGURE_ARGS="
 -Dperfetto=false
 -Dvalgrind=disabled
 -Dlibunwind=disabled
--Dallow-fallback-for=libdrm
---force-fallback-for=libdrm
--Dlibdrm:default_library=static
 "
 
 termux_step_pre_configure() {
