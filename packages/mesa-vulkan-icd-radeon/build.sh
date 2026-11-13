@@ -2,15 +2,14 @@ TERMUX_PKG_HOMEPAGE=https://github.com/JimVulkan/radv-xclipse
 TERMUX_PKG_DESCRIPTION="Mesa's Radeon Vulkan ICD modified to run with Samsung's Xclipse GPUs"
 TERMUX_PKG_LICENSE="MIT"
 TERMUX_PKG_MAINTAINER="@termux"
-TERMUX_PKG_VERSION="27.0.0"
-TERMUX_PKG_SRCURL="https://github.com/JimVulkan/radv-xclipse/archive/d29b3afcecc542119bd548308a34e8dead6f5655.tar.gz"
-TERMUX_PKG_SHA256=a8f1a45fc2c5ec95ad408cd3425f4547fb60698107ee1a425a0a003a2951b461
-TERMUX_PKG_AUTO_UPDATE=false
+TERMUX_PKG_VERSION="1.9.0"
+TERMUX_PKG_SRCURL="https://github.com/JimVulkan/radv-xclipse/archive/refs/tags/v${TERMUX_PKG_VERSION}.tar.gz"
+TERMUX_PKG_SHA256=d2fe7a69ae076b2c305e5932afaeb640e32bb4e84d437bc46f84d12e5812f5a1
+TERMUX_PKG_AUTO_UPDATE=true
 TERMUX_PKG_DEPENDS="libandroid-shmem, libc++, libwayland, libx11, libxext, libxfixes, libxshmfence, libxxf86vm, vulkan-loader, zlib"
 TERMUX_PKG_BUILD_DEPENDS="libwayland-cross-scanner, libwayland-protocols, libxrandr, mlir, spirv-tools, xorgproto"
 TERMUX_PKG_EXCLUDED_ARCHES="arm, i686, x86_64"
 
-# FIXME: Set `shared-llvm` to disabled if possible
 TERMUX_PKG_EXTRA_CONFIGURE_ARGS="
 --cmake-prefix-path ${TERMUX_PREFIX}
 -Dgbm=disabled
